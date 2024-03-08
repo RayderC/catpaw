@@ -6,9 +6,10 @@ import signup
 
 app = Flask(__name__)
 
-db = SQLAlchemy()
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
-app.config['SECRET_KEY'] = "mykey"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SECRET_KEY'] = 'mykey'
+db = SQLAlchemy(app)
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -28,10 +29,8 @@ def user_signup():
     return signup.signup()
 
 if __name__ == "__main__":
-    from app import db
-
-    db.create_all()
-    exit()
-    # app.run(debug=True)
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
 
 
