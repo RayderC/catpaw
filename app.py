@@ -1,29 +1,37 @@
-from flask import Flask, render_template, send_file, current_app
-import os
-from werkzeug.exceptions import NotFound
+from flask import Flask, url_for, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+import login
+import signup
 
-app = Flask(__name__, template_folder='html')
+app = Flask(__name__)
 
-@app.route('/', defaults={'req_path': ''})
-@app.route('/<path:req_path>')
-def index(req_path):
-    BASE_DIR = '/'  # Set your base directory here
+db = SQLAlchemy()
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///database.db"
+app.config['SECRET_KEY'] = "mykey"
 
-    # Join the base and the requested path
-    abs_path = os.path.join(BASE_DIR, req_path)
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
 
-    # Return 404 if path doesn't exist
-    if not os.path.exists(abs_path):
-        return current_app.make_response(
-            current_app.handle_user_exception(NotFound()))
+@app.route("/")
+def main():
+    return render_template("index.html")
 
-    # Check if path is a file and serve it
-    if os.path.isfile(abs_path):
-        return send_file(abs_path)
+@app.route("/login")
+def user_login():
+    return login.login()
 
-    # Show directory contents
-    files = os.listdir(abs_path)
-    return render_template('index.html', files=files)
+@app.route("/signup")
+def user_signup():
+    return signup.signup()
 
-if __name__ == '__main__':
-    app.run()
+if __name__ == "__main__":
+    from app import db
+
+    db.create_all()
+    exit()
+    # app.run(debug=True)
+
+
