@@ -19,8 +19,8 @@ def download_manga():
     while True:
         manga_names = ["Horimiya"]
         manga_links = ["https://images.mangafreak.net/downloads/Horimiya_"]
-        #db_manager.get("manga_downloader/manga.db", "manga", manga_names, 0)
-        #db_manager.get("manga_downloader/manga.db", "manga", manga_links, 1)
+        #db_manager.get("db/manga_downloads.db", "manga", manga_names, 0)
+        #db_manager.get("db/manga_downloads.db", "manga", manga_links, 1)
 
         for _ in manga_names:
             new_folder_path = folder_path + manga_names[0] + "/"

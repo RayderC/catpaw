@@ -23,3 +23,58 @@ def get(dbfile, dbtable, attribute, row):
 
     except sqlite3.Error as error:
         print(f'{red}Error occurred ({dbtable}) - {reset}', error)
+
+
+def update(dbfile, dbtable, item, attribute, row):
+    try:
+        print(f"{cyan}SQlite{reset}: update row({green}{row}{reset}), {attribute} = {item} from {green}{dbtable}{reset}")
+        con = sqlite3.connect(dbfile)
+        cur = con.cursor()
+        cur.execute(f"UPDATE {dbtable} SET name = test WHERE rowid = {row}")
+        #cur.execute(f"UPDATE {dbtable} SET {attribute} = {item} WHERE rowid = {row}")
+
+        con.commit()
+    except sqlite3.Error as error:
+        print(f'{red}Error occurred ({dbtable}) - {reset}', error)
+
+def delete(dbfile, dbtable, row):
+    try:
+        con = sqlite3.connect(dbfile)
+        cur = con.cursor()
+
+        cur.execute(f"DELETE from {dbtable} WHERE rowid = {row}")
+        con.commit()
+
+        print(f"{cyan}SQlite{reset}: Deleted row({green}{row}{reset}) from {green}{dbtable}{reset}")
+
+    except sqlite3.Error as error:
+        print(f'{red}Error occurred ({dbtable}) - {reset}', error)
+
+def add_new(dbfile, dbtable, name, link):
+    try:
+        print(f"{cyan}SQlite{reset}: add new value ({name}, {link}) to {green}{dbtable}{reset}")
+        con = sqlite3.connect(dbfile)
+        cur = con.cursor()
+
+        cur.execute(f"INSERT INTO {dbtable} VALUES ('{name}', '{link}')")
+
+        con.commit()
+
+    except sqlite3.Error as error:
+        print(f'{red}Error occurred ({dbtable}) - {reset}', error)
+
+
+def list_all(dbfile, dbtable):
+    try:
+        print(f"{cyan}SQlite{reset}: {green}{dbtable}{reset}")
+        con = sqlite3.connect(dbfile)
+        cur = con.cursor()
+
+        cur.execute(f"SELECT rowid, * from {dbtable}")
+        rows = cur.fetchall()
+
+        for row in rows:
+            print(row)
+
+    except sqlite3.Error as error:
+        print(f'{red}Error occurred ({dbtable}) - {reset}', error)
