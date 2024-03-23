@@ -1,0 +1,26 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #20252e;
+}
+
+a {
+    margin: 10px;
+    text-decoration: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #1d2b47;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#151922
+#20252e
+#162034
+#1d2b47
+#183446
