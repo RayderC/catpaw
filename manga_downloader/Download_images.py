@@ -8,6 +8,7 @@ from colorama import Fore, Style
 red = Fore.RED
 blue = Fore.BLUE
 green = Fore.GREEN
+cyan = Fore.CYAN
 reset = Style.RESET_ALL
 
 
