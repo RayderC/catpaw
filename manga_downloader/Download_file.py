@@ -7,6 +7,7 @@ from colorama import Fore, Style
 red = Fore.RED
 blue = Fore.BLUE
 green = Fore.GREEN
+cyan = Fore.CYAN
 reset = Style.RESET_ALL
 
 download_list = []
@@ -23,7 +24,7 @@ def download_file(name, url, folder_path, num, file_size, response):
                 with open(folder_path + f'{name} {num}.cbz', 'wb') as f:
                     f.write(response.content)
 
-                print(f"{blue}Download complete: {red}'{name} {num}.cbz'{blue} saved to {green}'{folder_path}' {blue}Size: {red}{round(file_size / 1024)}{blue}KB.{reset}")
+                print(f"{cyan}Manga Downloader{reset}: {blue}Download complete - {red}'{name} {num}.cbz'{blue} saved to {green}'{folder_path}' {blue}Size: {red}{round(file_size / 1024)}{blue}KB.{reset}")
                 break
             else:
                 break

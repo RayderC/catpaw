@@ -16,8 +16,6 @@ def download_images(name, url, folder_path, num):
     extracted_part = url.split("/downloads/")[-1]
     url = f"https://w15.mangafreak.net/Read1_{extracted_part}"
 
-    # print(f"{green}Downloading: {blue}{name} {num}, {red}this is going to take a second{reset}")
-
     # Make a request to the website
     response = requests.get(url)
 
@@ -58,4 +56,4 @@ def download_images(name, url, folder_path, num):
         # print(f"{red}Zipped: {blue}{name} {num}.cbz{reset}")
 
     else:
-        print(f"Failed to retrieve the webpage. Status code: {response.status_code}")
+        print(f"{cyan}Manga Downloader{reset}: {red}Failed to retrieve the webpage - Status code{reset}: {response.status_code}")
