@@ -35,8 +35,8 @@ def download_manga():
         manga_downloader.cmd.runcmd("sudo chown -R www-data:www-data /srv/mergerfs/Vault/Vault/nextcloud/")
         manga_downloader.cmd.runcmd("sudo chmod -R g+s /srv/mergerfs/Vault/Vault/nextcloud/")
 
-        for i in manga_downloader.Download_file.download_list:
-            print(magenta + i + reset)
+        #for i in manga_downloader.Download_file.download_list:
+        #    print(f"{cyan}Manga Downloader{reset}: " + magenta + i + reset)
         manga_downloader.Download_file.download_list.clear()
 
         if wait_time / 60 < 60:
