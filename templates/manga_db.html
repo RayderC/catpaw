@@ -3,9 +3,28 @@
 {% block content %}
 
 <body>
-<a href="{{ url_for('home_page') }}">
-    <button>Home</button>
-</a>
+    <a href="{{ url_for('home_page') }}">
+        <button>Home</button>
+    </a>
+    <br/><br/>
+
+    <form action="/database/manga" method="POST">
+        <div>
+              <select name="dbtable">
+                <option value="manga">Manga</option>
+              </select>
+              <select name="dbfile">
+                <option value="/db/manga_downloads.db">Manga downloads</option>
+              </select>
+            <input type="text" placeholder="manga name" name="name">
+            <input type="text" placeholder="manga link" name="link">
+        </div>
+
+        <button type="submit">
+            submit
+        </button>
+    </form>
+
 </body>
 
 {% endblock %}

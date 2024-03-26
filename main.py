@@ -1,6 +1,6 @@
 import thread_manager
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # thread_manager.start()
 
@@ -12,8 +12,15 @@ def home_page():
     return render_template('index.html', title="Home")
 
 
-@app.route('/database/manga')
+@app.route('/database/manga', methods=["POST", "GET"])
 def database_manga():
+    dbfile = request.form.get("dbfile")
+    dbtable = request.form.get("dbtable")
+    name = request.form.get("name")
+    link = request.form.get("link")
+
+    print(dbfile, dbtable, name, link)
+
     return render_template("manga_db.html", title="Manga db")
 
 @app.route('/manga.read')
