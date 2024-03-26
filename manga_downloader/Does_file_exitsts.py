@@ -6,6 +6,7 @@ from colorama import Fore, Style
 red = Fore.RED
 blue = Fore.BLUE
 green = Fore.GREEN
+cyan = Fore.CYAN
 reset = Style.RESET_ALL
 
 
@@ -18,7 +19,7 @@ def does_file_exitst(folder_path, name, link):
         if os.path.exists(file_to_download):
             if os.path.getsize(file_to_download) <= 64:
                 os.remove(file_to_download)
-                print(f"{red}Redownloading: {blue}{name} {str(num)}.cbz{reset}")
+                print(f"{cyan}Manga Downloader{reset}: {red}Redownloading - {blue}{name} {str(num)}.cbz{reset}")
 
         if not os.path.exists(file_to_download):
             url = link + str(num)
@@ -40,6 +41,6 @@ def create_directory(path):
         try:
             # Create the directory
             os.makedirs(path)
-            print(f"{red}Directory created: '{green}{path}'{red}")
+            print(f"{cyan}Manga Downloader{reset}: {red}Directory created - '{green}{path}'{red}")
         except OSError as e:
-            print(f"{red}Error creating directory '{path}': {e}{reset}")
+            print(f"{cyan}Manga Downloader{reset}: {red}Error creating directory '{path}' - {e}{reset}")
