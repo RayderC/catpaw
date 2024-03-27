@@ -1,16 +1,26 @@
 import thread_manager
 
-from flask import Flask, render_template, request
+import sqlite3
+from flask import Flask, render_template, request, url_for, flash, redirect
 
 # thread_manager.start()
 
 app = Flask(__name__)
-app.secret_key = "secret key"
+app.config['SECRET_KEY'] = 'your secret key'
+
+# sqlite
+def get_db_connection():
+    conn = sqlite3.connect('database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
 
 # Flask app routes
 @app.route('/')
 def home_page():
-    return render_template('index.html', title="Home")
+    conn = get_db_connection()
+    posts = conn.execute('SELECT * FROM posts').fetchall()
+    conn.close()
+    return render_template('index.html', title="Home", posts=posts)
 
 
 @app.route('/database/manga', methods=["POST", "GET"])

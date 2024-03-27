@@ -30,10 +30,11 @@ def update(dbfile, dbtable, item, attribute, row):
         print(f"{cyan}SQlite{reset}: update row({green}{row}{reset}), {attribute} = {item} from {green}{dbtable}{reset}")
         con = sqlite3.connect(dbfile)
         cur = con.cursor()
-        cur.execute(f"UPDATE {dbtable} SET name = test WHERE rowid = {row}")
+        cur.execute(f"UPDATE {dbtable} SET name = ? WHERE rowid = ?", (attribute), row)
         #cur.execute(f"UPDATE {dbtable} SET {attribute} = {item} WHERE rowid = {row}")
 
         con.commit()
+        con.close()
     except sqlite3.Error as error:
         print(f'{red}Error occurred ({dbtable}) - {reset}', error)
 
@@ -44,6 +45,7 @@ def delete(dbfile, dbtable, row):
 
         cur.execute(f"DELETE from {dbtable} WHERE rowid = {row}")
         con.commit()
+        con.close()
 
         print(f"{cyan}SQlite{reset}: Deleted row({green}{row}{reset}) from {green}{dbtable}{reset}")
 
@@ -59,6 +61,7 @@ def add_new(dbfile, dbtable, name, link):
         cur.execute(f"INSERT INTO {dbtable} VALUES ('{name}', '{link}')")
 
         con.commit()
+        con.close()
 
     except sqlite3.Error as error:
         print(f'{red}Error occurred ({dbtable}) - {reset}', error)
@@ -76,5 +79,6 @@ def list_all(dbfile, dbtable):
         for row in rows:
             print(row)
 
+        con.close()
     except sqlite3.Error as error:
         print(f'{red}Error occurred ({dbtable}) - {reset}', error)
