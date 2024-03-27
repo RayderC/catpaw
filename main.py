@@ -7,6 +7,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 app.secret_key = "secret key"
 
+# Flask app routes
 @app.route('/')
 def home_page():
     return render_template('index.html', title="Home")
@@ -32,4 +33,4 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
 
 # Ends the program pretty much
-thread_manager.stop()
+# thread_manager.stop()
